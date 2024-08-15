@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Тестирование текста</title>
+<style>
+  body { /* Применение шрифта Trebuchet MS ко всему тексту, включая поля ввода и кнопки */
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+  }
+  input { /* Применение шрифта Trebuchet MS ко всему тексту, включая поля ввода и кнопки */
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    border-radius: 4px; /* Скругление углов */
+    border: 1px solid #000; /* Цвет контура */
+  }
+button {
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+  background: linear-gradient(to bottom, #EFF9FF 0%, #C2C9CE 100%); /* Градиент для кнопки */
+  border: 1px solid #000; /* Цвет контура кнопки */
+  padding: 1.2px 7px ; /* Отступы внутри кнопки */
+  color: inherit; /* Цвет шрифта кнопки */
+  border-radius: 4px; /* Скругление углов кнопки */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для кнопки */
+  transition: all 0.3s ease; /* Плавный эффект при наведении */
+}
+  #miniWindow {
+    border: 1px solid #000;
+    border-radius: 4px; /* Скругление углов кнопки */
+    padding: 10px;
+    margin-top: 10px;
+    width: 200px;
+    height: 20px;
+    overflow: auto;
+  }
+</style>
+</head>
+<body>
+
+<input type="text" id="textField">
+<button onclick="testText()">протестировать!</button>
+<div id="miniWindow"></div>
+
+<script>
+  function testText() {
+    var textValue = document.getElementById('textField').value;
+    document.getElementById('miniWindow').innerText = textValue;
+    document.getElementById('textField').value = ''; // Очистить текстовое поле
+  }
+</script>
+
+</body>
+</html>
