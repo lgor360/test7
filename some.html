@@ -48,5 +48,272 @@
     </div>
     <font color="#FFFFFF">тут можно порисовать :D</font><br><br>
     <img src="/igor360website/void.png" alt="ты чё читер? как ты нашёл это пустое изображение на этой странице?">
+
+    <script>
+        const loadingWindow = document.getElementById('loading-window');
+        const startButton = document.getElementById('start-button');
+        const progressBar = document.getElementById('loading-progress-bar');
+
+        let progress = 0;
+
+        const timer = setInterval(() => {
+            progress += 1;
+            progressBar.style.width = progress + '%'; // Конкатенация строки используется для обновления ширины
+
+            if (progress >= 100) {
+                clearInterval(timer);
+                setTimeout(() => {
+                    loadingWindow.hidden = true;
+                    startButton.hidden = false;
+                }, 200);
+            }
+        }, 100);
+
+startButton.addEventListener('click', () => {
+    initiatePaintApp();
+    loadingWindow.remove(); // Удаляем только окно загрузки
+    startButton.remove(); // Удаляем кнопку "Начать"
+});
+
+    function initiatePaintApp() {
+    const body = document.body;
+    const canvas = document.createElement('canvas');
+    canvas.id = 'paintCanvas';
+    canvas.width = 100;
+    canvas.height = 100;
+    body.appendChild(canvas);
+
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // ... Ваш код для создания интерфейса ...
+
+    // Кнопки для изменения размера холста
+    const resizeButtons = ['50x50','100x100', '200x100', '200x150'];
+    resizeButtons.forEach(size => {
+      const button = document.createElement('button');
+      button.innerText = size;
+      button.addEventListener('click', () => {
+        const [width, height] = size.split('x');
+        canvas.width = width;
+        canvas.height = height;
+        // Перезаполняем фон после изменения размера
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      });
+      body.appendChild(button);
+    });
+
+            // Добавляем текстовые поля для ввода размеров и кнопку для применения
+            const widthHeightContainer = document.createElement('div');
+            widthHeightContainer.innerHTML = `
+                <label for="widthInput"> </label>
+                <input type="number" id="widthInput" placeholder="Ширина">
+                <label for="heightInput"> </label>
+                <input type="number" id="heightInput" placeholder="Высота">
+                <button id="resizeButton">Применить</button>
+            `;
+            body.appendChild(widthHeightContainer);
+
+            // Получаем элементы текстовых полей и кнопки
+            const widthInput = document.getElementById('widthInput');
+            const heightInput = document.getElementById('heightInput');
+            const resizeButton = document.getElementById('resizeButton');
+
+            // Функция для изменения размера холста
+            function resizeCanvas() {
+                const width = widthInput.value;
+                const height = heightInput.value;
+
+                if (width && height) {
+                    canvas.width = width;
+                    canvas.height = height;
+                    // Перезаполняем фон после изменения размера
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                } else {
+                    alert('Пожалуйста, введите корректные значения ширины и высоты.');
+                }
+            }
+
+            // Обработчик события клика для кнопки
+            resizeButton.addEventListener('click', resizeCanvas);
+
+    // Выбор размера кисти
+    const brushSizeLabel = document.createElement('label');
+    brushSizeLabel.innerText = 'Выбор размера кисти:';
+    body.appendChild(brushSizeLabel);
+
+    const brushSizeSelect = document.createElement('select');
+    brushSizeSelect.id = 'brushSize';
+    ['Маленькая', 'Средняя', 'Большая'].forEach((size, index) => {
+      const option = document.createElement('option');
+      option.value = index === 0 ? '5' : (index === 1 ? '10' : '20');
+      option.innerText = size;
+      if (index === 1) option.selected = true;
+      brushSizeSelect.appendChild(option);
+    });
+    body.appendChild(brushSizeSelect);
+
+    // Выбор цвета
+    const colorPicker = document.createElement('input');
+    colorPicker.type = 'color';
+    colorPicker.id = 'colorPicker';
+    body.appendChild(colorPicker);
+
+    // Кнопка кисти
+    const brushButton = document.createElement('button');
+    brushButton.innerText = 'Кисть';
+    brushButton.id= 'brushButton';
+    body.appendChild(brushButton);
+
+    // Кнопка ластика
+    const eraserButton = document.createElement('button');
+    eraserButton.innerText = 'Ластик';
+    eraserButton.id= 'eraserButton';
+    body.appendChild(eraserButton);
+
+    // Кнопка очистки холста
+    const clearButton = document.createElement('button');
+    clearButton.innerText = 'Очистить холст';
+    clearButton.addEventListener('click', () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    });
+    body.appendChild(clearButton);
+
+    // Кнопка сохранения изображения
+    const saveButton = document.createElement('button');
+    saveButton.innerText = 'Сохранить изображение';
+    saveButton.addEventListener('click', () => {
+      const image = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+      const link = document.createElement('a');
+      link.download = 'рисунок.png';
+      link.href = image;
+      link.click();
+    });
+    body.appendChild(saveButton);
+
+    // Функция для обновления мини-текста с названием текущего инструмента
+    function updateToolIndicator(toolName) {
+      document.getElementById('tool-indicator').textContent = `Выбран инструмент: ${toolName}`;
+    }
+
+    // Обработчики событий для кнопок инструментов
+    brushButton.addEventListener('click', function() {
+      activateBrush();
+    });
+
+    eraserButton.addEventListener('click', function() {
+      activateEraser();
+    });
+
+
+// Функции для обработки сенсорных событий
+function touchStart(e) {
+    e.preventDefault();
+    startPosition(getTouchPos(canvas, e));
+}
+
+function touchEnd(e) {
+    e.preventDefault();
+    finishedPosition();
+}
+
+function touchMove(e) {
+    e.preventDefault();
+    draw(getTouchPos(canvas, e));
+}
+
+// Функция для получения позиции касания
+function getTouchPos(canvasDom, touchEvent) {
+    var rect = canvasDom.getBoundingClientRect();
+    return {
+        x: touchEvent.touches[0].clientX - rect.left,
+        y: touchEvent.touches[0].clientY - rect.top
+    };
+}
+
+    // ... добавьте обработчики для других инструментов по аналогии
+
+    // Элемент HTML для индикатора инструмента
+    // Убедитесь, что этот элемент добавлен в ваш HTML
+
+    let painting = false;
+    let currentColor = '#000000'; // Переменная для хранения текущего цвета
+
+    function startPosition(pos) {
+      painting = true;
+      draw(pos);
+    }
+
+    function finishedPosition() {
+      painting = false;
+      ctx.beginPath();
+      ctx.globalCompositeOperation = 'source-over';
+    }
+
+    function getTouchPos(canvasDom, touchEvent) {
+      var rect = canvasDom.getBoundingClientRect();
+      return {
+        x: touchEvent.touches[0].clientX - rect.left,
+        y: touchEvent.touches[0].clientY - rect.top
+      };
+    }
+
+    function draw(pos) {
+      if (!painting) return;
+      ctx.lineWidth = document.getElementById('brushSize').value;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = document.getElementById('colorPicker').value;
+
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(pos.x, pos.y);
+    }
+
+    // Функция для активации кисти
+    function activateBrush() {
+console.log("прохладно... * пссссс * АШУТ ОТКРЫВАЙ ПАРАШУТ АЖУАЛФЗЙОУКПДЖЩЖШОУПРЩГШПКРШГУУДЦАДШШИОЙЦАУШТЖОУПТШГЖПУЦШРЖО")
+      colorPicker.value = currentColor; // Восстановление сохранённого цвета
+      colorPicker.disabled = false; // Разблокировка элемента выбора цвета
+      updateToolIndicator('кисть'); // Обновление индикатора инструмента
+      // Дополнительный код для активации кисти...
+    }
+
+    // Функция для активации ластика
+    function activateEraser() {
+      currentColor = colorPicker.value; // Сохранение текущего цвета
+      colorPicker.value = '#FFFFFF'; // Установка белого цвета для ластика
+      colorPicker.disabled = true; // Блокировка элемента выбора цвета
+      updateToolIndicator('ластик'); // Обновление индикатора инструмента
+      // Дополнительный код для активации ластика...
+    }
+
+    // Обработчики событий для мыши
+    canvas.addEventListener('mousedown', e => startPosition({x: e.offsetX, y: e.offsetY}));
+    canvas.addEventListener('mouseup', finishedPosition);
+    canvas.addEventListener('mousemove', e => draw({x: e.offsetX, y: e.offsetY}));
+
+    // Обработчики событий для сенсорных устройств
+    canvas.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      startPosition(getTouchPos(canvas, e));
+    }, false);
+    canvas.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      finishedPosition();
+    }, false);
+    canvas.addEventListener('touchmove', function(e) {
+      e.preventDefault();
+      draw(getTouchPos(canvas, e));
+    }, false);
+
+    // ... Остальной код ...
+  }
+</script>
 </body>
 </html>
