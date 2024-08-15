@@ -11,6 +11,7 @@
             display: flex;
             font-size: 28px;
             text-align: center;
+            color: "#FFFFFF";
         }
         .verhpanel a {
             float: right;
@@ -25,9 +26,80 @@
             padding: 14px 16px;
             text-decoration: none;
             font-size: 20px;
+        /* Переопределяем цвет текста для кнопок и менюшек */
+select {
+    font-family: "trebuchet ms";
+    border-radius: 4px; /* Скругление углов */
+}
+button {
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+  background: linear-gradient(to bottom, #EFF9FF 0%, #C2C9CE 100%); /* Градиент для кнопки */
+  border: 1px solid #000; /* Цвет контура кнопки */
+  padding: 1.2px 7px ; /* Отступы внутри кнопки */
+  color: inherit; /* Цвет шрифта кнопки */
+  border-radius: 4px; /* Скругление углов кнопки */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для кнопки */
+  transition: all 0.3s ease; /* Плавный эффект при наведении */
+}
+  input { /* Применение шрифта Trebuchet MS ко всему тексту, включая поля ввода и кнопки */
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    border-radius: 4px; /* Скругление углов */
+    border: 1px solid #000; /* Цвет контура */
+  }
+#tool-indicator {
+font-family: 'Trebuchet MS', Arial, sans-serif;
+}
+label {
+font-family: 'Trebuchet MS', Arial, sans-serif;
+}
+#widthInput {
+width: 60px;
+}
+#heightInput {
+width: 60px;
+}
+        #canvas {
+            border: 1px solid #000;
         }
-        .paint {
-            display: 600px;
+        #loading-window {
+            border-radius: 10px; /* Скруглики */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #BAD7F5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10; /* Убедитесь, что loading window находится выше других элементов */
+        }
+        #loading-text {
+            font-size: 19px;
+            color: initial;
+    font-family: "trebuchet ms";
+        }
+        #loading-progress {
+            border-radius: 3.5px; /* Скругление углов */
+            width: 150px;
+            height: 10px;
+            background-color: #E1EBF4;
+            border: 1px solid #000;
+        }
+        #loading-progress-bar {
+            border-radius: 3.5px; /* Скругление углов */
+            width: 0px;
+            height: 100%;
+            background-color: #7AB7F4;
+            transition: width 1s linear;
+        }
+        #start-button {
+            position: absolute;
+            bottom: 30px;
+            left: 30px; /* Исправлено: Добавлено 'px' */
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 11; /* Убедитесь, что кнопка начать находится выше loading window */
         }
     </style>
 </head>
