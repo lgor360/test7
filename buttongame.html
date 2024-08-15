@@ -66,16 +66,8 @@ function createButton(isCorrect) {
 }
 
 function showModal() {
-  const modal = document.createElement('div');
-  modal.style.position = 'fixed';
-  modal.style.left = '50%';
-  modal.style.top = '50%';
-  modal.style.transform = 'translate(-50%, -50%)';
-  modal.style.backgroundColor = 'white';
-  modal.style.padding = '20px';
-  modal.style.zIndex = '1000';
-  modal.innerText = 'вы выйграли!';
-  document.body.appendChild(modal);
+    alert('вы выйграли!'); // Вывод сообщения об ошибке
+    window.location.reload(); // Перезагрузка страницы
 }
 
 setupGame();
