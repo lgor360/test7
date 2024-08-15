@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Мини-игра "Найди кнопку"</title>
+<style>
+button {
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+  background: linear-gradient(to bottom, #EFF9FF 0%, #C2C9CE 100%); /* Градиент для кнопки */
+  border: 1px solid #000; /* Цвет контура кнопки */
+  padding: 1.2px 7px ; /* Отступы внутри кнопки */
+  color: inherit; /* Цвет шрифта кнопки */
+  border-radius: 4px; /* Скругление углов кнопки */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для кнопки */
+  transition: all 0.3s ease; /* Плавный эффект при наведении */
+}
+  .game-button {
+    margin: 10px;
+  }
+</style>
+</head>
+<body>
+
+<div class="button-container" id="buttonContainer"></div>
+
+<script>
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  function createButton(isCorrect) {
+    const button = document.createElement('button');
+    button.innerText = 'Кнопка';
+    button.classList.add('game-button');
+    if (isCorrect) {
+      button.onclick = function() { showModal(); };
+    } else {
+      button.onclick = function() { window.location.reload(); };
+    }
+    return button;
+  }
+
+function setupGame() {
+  const buttons = [];
+  for (let i = 0; i < 50; i++) {
+    buttons.push(createButton(i === 0)); // Первая кнопка будет "верной"
+  }
+  shuffleArray(buttons);
+  const container = document.getElementById('buttonContainer');
+  buttons.forEach(button => container.appendChild(button));
+}
+
+function createButton(isCorrect) {
+  const button = document.createElement('button');
+  button.innerText = 'верная';
+  button.classList.add('game-button');
+  if (isCorrect) {
+    button.onclick = function() { showModal(); };
+  } else {
+    button.onclick = function() { window.location.reload(); };
+  }
+  return button;
+}
+
+function showModal() {
+  const modal = document.createElement('div');
+  modal.style.position = 'fixed';
+  modal.style.left = '50%';
+  modal.style.top = '50%';
+  modal.style.transform = 'translate(-50%, -50%)';
+  modal.style.backgroundColor = 'white';
+  modal.style.padding = '20px';
+  modal.style.zIndex = '1000';
+  modal.innerText = 'вы выйграли!';
+  document.body.appendChild(modal);
+}
+
+setupGame();
+</script>
+
+</body>
+</html>
