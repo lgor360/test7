@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Капча</title>
+<style>
+  body {
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+  }
+  input, button {
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    border-radius: 4px;
+    border: 1px solid #000;
+    margin: 5px 0;
+  }
+  button {
+    background: linear-gradient(to bottom, #EFF9FF 0%, #C2C9CE 100%);
+    color: inherit;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+</style>
+</head>
+<body>
+
+<div id="captcha" style="font-size: 24px; margin-bottom: 10px;"></div>
+<input type="text" id="textField" placeholder="Введите код здесь">
+<button onclick="checkCaptcha()">Протестировать!</button>
+
+<script>
+// Функция для генерации случайного кода
+function generateCaptcha() {
+  var captcha = '';
+  for (var i = 0; i < 6; i++) {
+    captcha += Math.floor(Math.random() * 10); // Генерация одной цифры от 0 до 9
+  }
+  document.getElementById('captcha').innerText = captcha; // Отображение кода в элементе с id 'captcha'
+}
+
+// Функция для проверки кода
+function checkCaptcha() {
+  var inputCode = document.getElementById('textField').value; // Получение введённого кода
+  var actualCode = document.getElementById('captcha').innerText; // Получение сгенерированного кода
+  if (inputCode === actualCode) {
+    showModal(); // Показ модального окна, если код верный
+  } else {
+    alert('неверно :('); // Вывод сообщения об ошибке
+    window.location.reload(); // Перезагрузка страницы
+  }
+}
+
+// Функция для отображения модального окна
+function showModal() {
+    alert('верно :)'); // Вывод сообщения об ошибке
+    window.location.reload(); // Перезагрузка страницы
+}
+
+// Генерация кода при загрузке страницы
+window.onload = generateCaptcha;
+</script>
+
+</body>
+</html>
