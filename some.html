@@ -68,12 +68,18 @@
     <img src="/igor360website/void.png" alt="ты чё читер? как ты нашёл это пустое изображение на этой странице?">
     <div class="ymaug">
         <button type="button" onclick="games()">развлечения</button>
-        <button type="button" disabled>галерея</button>
-        <button type="button" disabled>котики</button>
+        <button type="button" onclick="gallary()">галерея</button>
+        <button type="button" onclick="cats()">котики</button>
     </div>
     <script>
         function games() {
              location.replace("/igor360website/games.html")
+        }
+        function cats() {
+             location.replace("/igor360website/cats.html")
+        }
+        function gallary() {
+             location.replace("/igor360website/gallary.html")
         }
     </script>
 </body>
