@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>сайт оцелота :3</title>
     <linkrel="icon" href="favicon.png" type="image/x-icon">
     <style>
@@ -48,6 +49,24 @@
             text-decoration: none;
             font-size: 20px;
         }
+        @media (orientation: landscape) {
+            .void {
+                width: 1500px;
+            }
+            .mydata {
+                width: 1500px;
+                height: 698px;
+            }
+        }
+        @media (orientation: portrait) {
+            .void {
+                width: 650px;
+            }
+            .mydata {
+                width: 500px;
+                height: 232px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -59,7 +78,7 @@
        <a class="now" href="https://lgor360.github.io/igor360website/home.html">сайт оцелота :3</a>
     </div>
 
-    <img id="mydata" src="/igor360website/mydata.png" alt="немного про создателя">
+    <img id="mydata" src="/igor360website/mydata.png" alt="немного про создателя" class="mydata">
     <font color="#FFFFFF">вот мои соц. сети</font><br><br>
     
 <div class="si">
@@ -85,7 +104,7 @@
     <img src="/igor360website/gh.png" alt="гитхабик :3 (если бы не гитхаб, то этот сайт был бы на Google Sites)">
   </a>
 </div>
-    <img src="/igor360website/void.png" alt="ты чё читер? как ты нашёл это пустое изображение на этой странице?">
+    <img src="/igor360website/void.png" alt="ты чё читер? как ты нашёл это пустое изображение на этой странице?" class="void">
     <font color="#FFFFFF" id:"u">код и вид: Игорь360, Интернет и ChatGPT</font><br><br>
     <audio autoplay loop preload="auto" src="/igor360website/faero.mp3"></audio>
 </body>
