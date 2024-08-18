@@ -34,6 +34,7 @@ font-family: 'Trebuchet MS', Arial, sans-serif;
 }
 label {
 font-family: 'Trebuchet MS', Arial, sans-serif;
+    color: #FFFFFF;
 }
 #widthInput {
 width: 60px;
@@ -182,7 +183,7 @@ startButton.addEventListener('click', () => {
                     ctx.fillStyle = '#FFFFFF';
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
                 } else {
-                    alert('Пожалуйста, введите корректные значения ширины и высоты.');
+                    alert('Ой! Кажется ты ввёл не верные значения ширины и/или высоты! Введи что-то верное, пожалуйста :3');
                 }
             }
 
@@ -191,7 +192,7 @@ startButton.addEventListener('click', () => {
 
     // Выбор размера кисти
     const brushSizeLabel = document.createElement('label');
-    brushSizeLabel.innerText = 'Выбор размера кисти:';
+    brushSizeLabel.innerText = 'Размеры кисточки:';
     body.appendChild(brushSizeLabel);
 
     const brushSizeSelect = document.createElement('select');
