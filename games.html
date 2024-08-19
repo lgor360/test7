@@ -98,5 +98,30 @@
     <img src="/igor360website/p.png" alt="ты держишь телефон по вертикали" class="p">
     <img src="/igor360website/l.png" alt="ты держишь телефон по горизонтали" class="l">
     <audio autoplay loop preload="auto" src="/igor360website/dsi-shop.mp3"></audio>
+<script>
+    var Name = "WHAT.png"; 
+        if (navigator.userAgent.indexOf("Win") != -1) Name =  
+          "win.png"; 
+        if (navigator.userAgent.indexOf("Mac") != -1) Name =  
+          "mac.png"; 
+        if (navigator.userAgent.indexOf("Linux") != -1) Name =  
+          "tux.png"; 
+        if (navigator.userAgent.indexOf("Android") != -1) Name =  
+          "and.png"; 
+        if (navigator.userAgent.indexOf("like Mac") != -1) Name =  
+          "apple.png"; 
+    let os = '/igor360website/' + Name;
+
+    show_image(os);
+    
+    function show_image(src) {
+    var img = document.createElement("img");
+    img.src = src;
+    img.alt = "лого вашей системы";
+
+    // This next line will just add it to the <body> tag
+    document.body.appendChild(img);
+    }
+</script>
 </body>
 </html>
