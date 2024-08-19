@@ -41,11 +41,27 @@
             .void {
                 width: 1500px;
             }
+            .p {
+                visibility: hidden;
+                display: none;
+            }
         }
         @media (orientation: portrait) {
             .void {
                 width: 650px;
             }
+            .l {
+                visibility: hidden;
+                display: none;
+            }
+        }
+        .l {
+            height: 300px;
+            width: 363px;
+        }
+        .p {
+            height: 300px;
+            width: 247px;
         }
     </style>
 </head>
@@ -78,6 +94,9 @@
         <object width="85%" height="150px" data="captcha.html" style="border:none;"></object>
     </div>
     <font>вечная каптча. нафига</font><br><br>
+  <img src="/igor360website/void.png" alt="ты чё читер? как ты нашёл это пустое изображение на этой странице?" class="void">
+    <img src="/igor360website/p.png" alt="ты держишь телефон по вертикали" class="p">
+    <img src="/igor360website/l.png" alt="ты держишь телефон по горизонтали" class="l">
     <audio autoplay loop preload="auto" src="/igor360website/dsi-shop.mp3"></audio>
 </body>
 </html>
