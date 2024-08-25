@@ -1,0 +1,18 @@
+.void {
+  width: 650px;
+}
+.mydata-p {
+  width: 600px;
+  height: 490px;
+}
+.mydata {
+  visibility: hidden;
+  display: none;
+}
+.si img {
+  height: 65px;
+  width: 65px;
+  display: inline;
+  padding: 1px;
+  margin-right: 2px;
+}
