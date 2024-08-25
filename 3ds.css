@@ -1,17 +1,17 @@
 .void {
-  width: 650px;
+  width: 300px;
 }
 .mydata-p {
-  width: 600px;
-  height: 490px;
+  width: 300px;
+  height: 190px;
 }
 .mydata {
   visibility: hidden;
   display: none;
 }
 .si img {
-  height: 65px;
-  width: 65px;
+  height: 45px;
+  width: 45px;
   display: inline;
   padding: 1px;
   margin-right: 2px;
