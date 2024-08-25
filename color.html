@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Тестирование текста</title>
+<style>
+  body { /* Применение шрифта Trebuchet MS ко всему тексту, включая поля ввода и кнопки */
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    color: #FFFFFF
+  }
+button {
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+  background: linear-gradient(to bottom, #F7FFEF 0%, #C8CEC2 100%); /* Градиент для кнопки */
+  border: 1px solid #000; /* Цвет контура кнопки */
+  padding: 1.2px 7px ; /* Отступы внутри кнопки */
+  color: #000000; /* Цвет шрифта кнопки */
+  border-radius: 4px; /* Скругление углов кнопки */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для кнопки */
+  transition: all 0.3s ease; /* Плавный эффект при наведении */
+}
+</style>
+</head>
+<body>
+<select name="colorselect" id="cselect">
+  <option value="black">Чёрный</option>
+  <option value="red">Красный</option>
+  <option value="orange">Оранжевый</option>
+  <option value="yellow">Жёлтый</option>
+  <option value="green">Зелёный</option>
+  <option value="blue">Голубой</option>
+  <option value="purple">Фиолетовый</option>
+  <option value="pink">Розовый</option>
+</select>
+<button onclick="Color()">протестировать!</button>
+<div id="miniWindow"></div>
+  <script>
+    function Color() {
+      var C = document.getElementById("cselect").value;
+      alert(C);
+    }
+  </script>
+</body>
+</html>
